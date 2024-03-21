@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "id": "torches_in_water",
   "version": "${version}",
-  "name": "Torches In Water",
+  "name": "Torches in Water",
   "description": "添加了可以放在水中的火把。",
   "authors": ["Phoupraw"],
   "contact": {
-    "homepage": "TODO",
-    "sources": "TODO",
-    "issues": "TODO"
+    "homepage": "https://www.mcmod.cn/class/TODO.html",
+    "sources": "https://github.com/Phoupraw/TorchesInWater",
+    "issues": "https://github.com/Phoupraw/TorchesInWater/issues"
   },
   "entrypoints": {
     "main": [
@@ -52,8 +52,8 @@
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.modrinth": "TODO",
-        "modmenu.curseforge": "TODO"
+        "modmenu.modrinth": "https://modrinth.com/project/torches-in-water",
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/torches-in-water"
       }
     }
   },

@@ -3,11 +3,7 @@ package phoupraw.mcmod.torches_in_water.datagen
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
+import net.fabricmc.fabric.api.datagen.v1.provider.*
 import net.minecraft.block.Block
 import net.minecraft.data.client.*
 import net.minecraft.data.server.recipe.RecipeJsonProvider
@@ -60,15 +56,16 @@ private class ItemTagGen(output: FabricDataOutput, completableFuture: Completabl
         //getOrCreateTagBuilder(InfiniteFluidBucket.INFINITE).add(Items.BUCKET, Items.GLASS_BOTTLE, Items.WATER_BUCKET)
     }
 }
+
 private class RecipeGen(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun generate(exporter: Consumer<RecipeJsonProvider>) {
-        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS,TiWItems.GLOW_INK_TORCH)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, TiWItems.GLOW_INK_TORCH)
           .criterion("SBMJ", RecipeProvider.conditionsFromItem(Items.GLOW_INK_SAC))
-          .input('A',Items.GLOW_INK_SAC)
-          .input('B',Items.STICK)
+          .input('A', Items.GLOW_INK_SAC)
+          .input('B', Items.STICK)
           .pattern("A")
           .pattern("B")
-          .offerTo(exporter,TiWIDs.GLOW_INK_TORCH.withPrefixedPath("shaped_crafting/"))
+          .offerTo(exporter, TiWIDs.GLOW_INK_TORCH.withPrefixedPath("shaped_crafting/"))
     }
 }
 
@@ -86,38 +83,40 @@ private fun FabricLanguageProvider.TranslationBuilder.add(property: KProperty<*>
 private class ChineseGen(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataOutput, "zh_cn"/*傻逼MCDEV不能禁用警告*/) {
     override fun generateTranslations(b: TranslationBuilder) {
         b.add(TorchesInWater.NAME, "水中火把")
-        b.add("modmenu.descriptionTranslation.$ID", "添加了可以放置在水下的火把。")
+        b.add("modmenu.descriptionTranslation.$ID", "添加了可以放置在水中的火把。")
         val glowInkTorchName = "荧光墨汁火把"
         b.add(TiWBlocks.GLOW_INK_TORCH, glowInkTorchName)
-        b.add(TiWItems.GLOW_INK_TORCH.translationKey+".desc","可以放在水源或水流中。可以放在下半砖或楼梯的侧面。会被岩浆冲毁（可设置）。")
+        b.add(TiWItems.GLOW_INK_TORCH.translationKey + ".desc", "可以放在水源或水流中。可以放在下半砖或楼梯的侧面。会被岩浆冲毁（可设置）。")
         //b.add(TiWBlocks.WATER_GLOW_INK_TORCH, "水中的荧光墨囊火把")
         b.add("$CFG.category.${TorchesInWaterConfig.CATEGORY}", "设置")
         b.addYACLGroup(TorchesInWaterConfig.GLOW_INK_TORCH, glowInkTorchName)
         b.add(TorchesInWaterConfig::lavaDestroy, "岩浆破坏", "岩浆可以破坏$glowInkTorchName。")
     }
 }
+
 private class EnglishGen(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataOutput) {
     override fun generateTranslations(b: TranslationBuilder) {
         b.add(TorchesInWater.NAME, "Torches in Water")
         b.add("modmenu.descriptionTranslation.$ID", "Added torches which can be placed in water.")
         val glowInkTorchName = "Glow Ink Torch"
         b.add(TiWBlocks.GLOW_INK_TORCH, glowInkTorchName)
-        b.add(TiWItems.GLOW_INK_TORCH.translationKey+".desc","Can be placed in water source or flow. Can be placed on the side of bottom slab or stairs. Will be destroyed by lava (can be configured).")
+        b.add(TiWItems.GLOW_INK_TORCH.translationKey + ".desc", "Can be placed in water source or flow. Can be placed on the side of bottom slab or stairs. Will be destroyed by lava (can be configured).")
         //b.add(TiWBlocks.WATER_GLOW_INK_TORCH, "水中的荧光墨囊火把")
         b.add("$CFG.category.${TorchesInWaterConfig.CATEGORY}", "Settings")
         b.addYACLGroup(TorchesInWaterConfig.GLOW_INK_TORCH, glowInkTorchName)
         b.add(TorchesInWaterConfig::lavaDestroy, "Lava Destroy", "Lava can destroy $glowInkTorchName.")
     }
 }
+
 private class ModelGen(output: FabricDataOutput) : FabricModelProvider(output) {
     override fun generateBlockStateModels(g: BlockStateModelGenerator) {
         g.addTorchBlock(TiWBlocks.GLOW_INK_TORCH)
         g.addTorchItem(TiWBlocks.GLOW_INK_TORCH)
     }
 
-
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {
     }
+
     private fun BlockStateModelGenerator.addTorchBlock(torch: Block) {
         blockStateCollector.accept(VariantsBlockStateSupplier.create(torch).coordinate(BlockStateVariantMap.create(Properties.HOPPER_FACING)
           .register(Direction.DOWN, BlockStateVariant.create()
@@ -131,6 +130,7 @@ private class ModelGen(output: FabricDataOutput) : FabricModelProvider(output) {
               }
           }))
     }
+
     private fun BlockStateModelGenerator.addTorchItem(torch: Block) {
         excludeFromSimpleItemModelGeneration(torch)
         Models.GENERATED.upload(ModelIds.getItemModelId(torch.asItem()), TextureMap.layer0(torch), modelCollector)
