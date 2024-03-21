@@ -1,6 +1,7 @@
 {
   "block.torches_in_water.glow_ink_torch": "荧光墨汁火把",
   "block.torches_in_water.glow_ink_torch.desc": "可以放在水源或水流中。可以放在下半砖或楼梯的侧面。会被岩浆冲毁（可设置）。",
+  "dataPack.torches_in_water.override": "移除了Aquatic Torch的配方",
   "modmenu.descriptionTranslation.torches_in_water": "添加了可以放置在水中的火把。",
   "modmenu.nameTranslation.torches_in_water": "水中火把",
   "yacl3.config.torches_in_water:cfg.category.only": "设置",

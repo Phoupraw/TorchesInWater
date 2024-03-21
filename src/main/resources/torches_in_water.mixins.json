@@ -2,7 +2,7 @@
   "required": true,
   "package": "phoupraw.mcmod.torches_in_water.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": ["minecraft.MFlowableFluid"],
+  "mixins": ["minecraft.MFlowableFluid", "minecraft.MSchemas"],
   "injectors": {
     "defaultRequire": 1
   }

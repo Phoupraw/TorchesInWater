@@ -8,7 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import phoupraw.mcmod.torches_in_water.block.GlowInkTorchBlock;
 
-public interface TiWBlocks {
+public sealed interface TiWBlocks permits InterfaceFinaler {
     Block GLOW_INK_TORCH = r(TiWIDs.GLOW_INK_TORCH,new GlowInkTorchBlock(FabricBlockSettings.copyOf(Blocks.TORCH)));
     //Block WATER_GLOW_INK_TORCH = r(TiWIDs.WATER_GLOW_INK_TORCH,new WaterGlowInkTorchBlock(FabricBlockSettings.copyOf(GLOW_INK_TORCH).dropsLike(GLOW_INK_TORCH)));
     private static <T extends Block> T r(Identifier id,T value) {

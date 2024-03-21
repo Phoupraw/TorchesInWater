@@ -80,8 +80,12 @@ open class GlowInkTorchBlock(settings: Settings) : Block(settings), Waterloggabl
                 Vec3d(0.0, 12 / 16.0, 5 / 16.0).rotateY(side.horizontal * PI.toFloat() / -2).add(Vec3d.ofBottomCenter(pos))
             }
         //randomAddParticle(world, topPos, random)
-        if (state.get(Water).fluidState.getHeight(world, pos) >= topPos.y - pos.y || random.nextBoolean()) {
-            randomAddParticle(world, topPos, random)
+        val inWater = state.get(Water).fluidState.getHeight(world, pos) >= topPos.y - pos.y
+        if (inWater || random.nextBoolean()) {
+            world.addParticle(ParticleTypes.GLOW, topPos.x, topPos.y, topPos.z, 0.0, 0.0, 0.0)
+        }
+        if (inWater && random.nextInt(10) == 0) {
+            world.addParticle(ParticleTypes.GLOW_SQUID_INK, topPos.x, topPos.y, topPos.z, random.nextGaussian() / 50, random.nextGaussian() / 50, random.nextGaussian() / 50)
         }
     }
 
@@ -161,13 +165,6 @@ open class GlowInkTorchBlock(settings: Settings) : Block(settings), Waterloggabl
                 return sideCoversSmallSquare(world, pos1, opposite)
             }
             return !VoxelShapes.matchesAnywhere(world.getBlockState(pos1).getSidesShape(world, pos1).getFace(opposite), WALL, BooleanBiFunction.ONLY_SECOND)
-        }
-
-        fun randomAddParticle(world: World, pos: Vec3d, random: Random = world.random) {
-            world.addParticle(ParticleTypes.GLOW, pos.x, pos.y, pos.z, 0.0, 0.0, 0.0)
-            if (random.nextDouble() < 0.1) {
-                world.addParticle(ParticleTypes.GLOW_SQUID_INK, pos.x, pos.y, pos.z, random.nextGaussian() / 50, random.nextGaussian() / 50, random.nextGaussian() / 50)
-            }
         }
     }
     @JvmInline

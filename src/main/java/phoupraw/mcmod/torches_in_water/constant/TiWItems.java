@@ -9,10 +9,9 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import phoupraw.mcmod.torches_in_water.TiW;
 import phoupraw.mcmod.torches_in_water.TorchesInWater;
 
-public interface TiWItems {
+public sealed interface TiWItems permits InterfaceFinaler {
     BlockItem GLOW_INK_TORCH = r(TiWIDs.GLOW_INK_TORCH, new BlockItem(TiWBlocks.GLOW_INK_TORCH, new FabricItemSettings()));
     ItemGroup ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, TiWIDs.ITEM_GROUP,FabricItemGroup.builder()
       .displayName(Text.translatable(TorchesInWater.NAME))
