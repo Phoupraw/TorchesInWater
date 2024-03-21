@@ -1,0 +1,10 @@
+{
+  "block.torches_in_water.glow_ink_torch": "Glow Ink Torch",
+  "block.torches_in_water.glow_ink_torch.desc": "Can be placed in water source or flow. Can be placed on the side of bottom slab or stairs. Will be destroyed by lava (can be configured).",
+  "modmenu.descriptionTranslation.torches_in_water": "Added torches which can be placed in water.",
+  "modmenu.nameTranslation.torches_in_water": "Torches in Water",
+  "yacl3.config.torches_in_water:cfg.category.only": "Settings",
+  "yacl3.config.torches_in_water:cfg.category.only.group.glow_ink_torch": "Glow Ink Torch",
+  "yacl3.config.torches_in_water:cfg.lavaDestroy": "Lava Destroy",
+  "yacl3.config.torches_in_water:cfg.lavaDestroy.desc": "Lava can destroy Glow Ink Torch."
+}

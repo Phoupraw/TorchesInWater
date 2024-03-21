@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_torch",
+  "textures": {
+    "torch": "torches_in_water:block/glow_ink_torch"
+  }
+}

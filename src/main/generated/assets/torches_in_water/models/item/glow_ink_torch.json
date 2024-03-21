@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "torches_in_water:block/glow_ink_torch"
+  }
+}

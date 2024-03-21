@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "torches_in_water",
+  "version": "${version}",
+  "name": "Torches In Water",
+  "description": "添加了可以放在水中的火把。",
+  "authors": ["Phoupraw"],
+  "contact": {
+    "homepage": "TODO",
+    "sources": "TODO",
+    "issues": "TODO"
+  },
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "phoupraw.mcmod.torches_in_water.TorchesInWater"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "phoupraw.mcmod.torches_in_water.client.TorchesInWaterClient"
+      }
+    ],
+    "fabric-datagen": [
+      {
+        "adapter": "kotlin",
+        "value": "phoupraw.mcmod.torches_in_water.datagen.TorchesInWaterDataGen"
+      }
+    ],
+    "modmenu": [
+      {
+        "adapter": "kotlin",
+        "value": "phoupraw.mcmod.torches_in_water.config.TorchesInWaterModMenu"
+      }
+    ]
+  },
+  "environment": "*",
+  "depends": {
+    "fabricloader": "*",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*",
+    "phoupraws_linked_lib": "*",
+    "yet_another_config_lib_v3": "*"
+  },
+  "recommends": {
+    "modmenu": "*"
+  },
+  "mixins": ["torches_in_water.mixins.json"],
+  "icon": "assets/torches_in_water/icon.png",
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "TODO",
+        "modmenu.curseforge": "TODO"
+      }
+    }
+  },
+  "license": "MPL-2.0"
+}

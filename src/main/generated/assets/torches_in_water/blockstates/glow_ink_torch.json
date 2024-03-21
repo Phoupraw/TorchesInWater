@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "torches_in_water:block/glow_ink_torch"
+    },
+    "facing=east": {
+      "model": "torches_in_water:block/glow_ink_torch_wall",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "torches_in_water:block/glow_ink_torch_wall",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "torches_in_water:block/glow_ink_torch_wall",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "torches_in_water:block/glow_ink_torch_wall",
+      "y": 0
+    }
+  }
+}
