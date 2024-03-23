@@ -10,3 +10,11 @@
 # 0.1.1
 ## Change
 - Links.
+# 0.2.0
+## New
+- Embedded datapack, which removes recipe of _Aquatic Torches_ to prevent recipe conflict.
+- Can configure light level of glow ink torch.
+## Change
+- The texutre of glow ink torch is now animation.
+## Fix
+- The count of the result of the recipe of glow ink torch is 4 rather than usual 4.

@@ -14,7 +14,7 @@ import phoupraw.mcmod.torches_in_water.TorchesInWater;
 public sealed interface TiWItems permits InterfaceFinaler {
     BlockItem GLOW_INK_TORCH = r(TiWIDs.GLOW_INK_TORCH, new BlockItem(TiWBlocks.GLOW_INK_TORCH, new FabricItemSettings()));
     ItemGroup ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, TiWIDs.ITEM_GROUP,FabricItemGroup.builder()
-      .displayName(Text.translatable(TorchesInWater.NAME))
+      .displayName(Text.translatable(TorchesInWater.NAME_KEY))
       .icon(GLOW_INK_TORCH::getDefaultStack)
       .entries(TiWItems::entries)
       .build());

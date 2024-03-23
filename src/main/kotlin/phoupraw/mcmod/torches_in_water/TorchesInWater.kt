@@ -18,7 +18,7 @@ import phoupraw.mcmod.torches_in_water.constant.TiWItems
 
 object TorchesInWater : ModInitializer {
     const val ID = "torches_in_water"
-    const val NAME = "modmenu.nameTranslation.${ID}"
+    const val NAME_KEY = "modmenu.nameTranslation.${ID}"
     override fun onInitialize() {
         TiWItems.GLOW_INK_TORCH
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register {
