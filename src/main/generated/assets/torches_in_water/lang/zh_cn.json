@@ -1,14 +1,11 @@
 {
   "block.torches_in_water.glow_ink_torch": "荧光墨汁火把",
-  "block.torches_in_water.glow_ink_torch.desc": "可以放在水源或水流中。可以放在下半砖或楼梯的侧面。会被岩浆冲毁（可设置）。",
+  "block.torches_in_water.glow_ink_torch.desc": "可以放在水源或水流中，以及下半砖或楼梯的侧面。",
+  "config.torches_in_water.glowInkTorch_luminance": "亮度等级",
+  "config.torches_in_water.glowInkTorch_luminance.error": "已放置的火把不会自动更新亮度，需要破坏并重新放置",
+  "config.torches_in_water.lavaDestroy": "可以被岩浆冲毁",
+  "config.torches_in_water.restart": "此选项修改后需要重启游戏才能生效",
   "dataPack.torches_in_water.override": "移除Aquatic Torch的配方。",
-  "modmenu.descriptionTranslation.torches_in_water": "把火把放在水中！\n§l概要§r\n- 添加了荧光墨汁火把，可以放在水中，由荧光墨囊和木棍合成。\n§l介绍§r\n添加了可以放置在水中的火把。\n§l你知道吗§r\n本模组灵感来源于《Aquatic Torches》中的Aquatic Torch。",
-  "modmenu.nameTranslation.torches_in_water": "水中火把",
-  "yacl3.config.torches_in_water:cfg.category.only": "设置",
-  "yacl3.config.torches_in_water:cfg.category.only.group.glow_ink_torch": "荧光墨汁火把",
-  "yacl3.config.torches_in_water:cfg.category.only.group.glow_ink_torch.desc": "- 由荧光墨囊和木棍合成。\n- 可以放在水源或水流中。\n- 可以放在下半砖或楼梯的侧面。\n- 会被岩浆冲毁（可设置）。",
-  "yacl3.config.torches_in_water:cfg.glowInkTorch_luminance": "亮度",
-  "yacl3.config.torches_in_water:cfg.glowInkTorch_luminance.desc": "§c！此选项修改后需要重启游戏才能生效！§r\n方块的亮度等级。\n§e▲已放置的火把不会自动更新亮度，需要破坏并重新放置。▲§r",
-  "yacl3.config.torches_in_water:cfg.lavaDestroy": "岩浆破坏",
-  "yacl3.config.torches_in_water:cfg.lavaDestroy.desc": "岩浆可以冲毁荧光墨汁火把。"
+  "modmenu.descriptionTranslation.torches_in_water": "把火把放在水中！\n§l概要§r\n- 添加了荧光墨汁火把，可以放在水中，由荧光墨囊和木棍合成。\n§l介绍§r\n添加了可以放置在水中的火把，包括水流。\n§l你知道吗§r\n本模组灵感来源于《Aquatic Torches》中的Aquatic Torch。",
+  "modmenu.nameTranslation.torches_in_water": "水中火把"
 }

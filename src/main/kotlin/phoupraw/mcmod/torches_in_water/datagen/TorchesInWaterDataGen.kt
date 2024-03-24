@@ -19,16 +19,14 @@ import net.minecraft.state.property.Properties
 import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Direction
-import phoupraw.mcmod.torches_in_water.CONFIG
 import phoupraw.mcmod.torches_in_water.ID
 import phoupraw.mcmod.torches_in_water.TorchesInWater
-import phoupraw.mcmod.torches_in_water.config.TorchesInWaterConfig
+import phoupraw.mcmod.torches_in_water.config.TiWConfig
 import phoupraw.mcmod.torches_in_water.constant.TiWBlocks
 import phoupraw.mcmod.torches_in_water.constant.TiWIDs
 import phoupraw.mcmod.torches_in_water.constant.TiWItems
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
-import kotlin.reflect.KProperty
 
 object TorchesInWaterDataGen : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(g: FabricDataGenerator) {
@@ -77,28 +75,27 @@ private class RecipeGen(output: FabricDataOutput) : FabricRecipeProvider(output)
     }
 }
 
-private val CFG = "yacl3.config.${CONFIG.id()}"
+//private val CFG = "yacl3.config.${CONFIG.id()}"
 private fun FabricLanguageProvider.TranslationBuilder.addWithDesc(item: Item, name: String, desc: String) {
     add(item, name)
     add(item.translationKey + ".desc", desc)
 }
 
-private fun FabricLanguageProvider.TranslationBuilder.addYACLGroup(/*category:String,*/group: String, name: String, desc: String) {
-    add("$CFG.category.${TorchesInWaterConfig.CATEGORY}.group.$group", name)
-    add("$CFG.category.${TorchesInWaterConfig.CATEGORY}.group.$group.desc", desc)
-}
-
-private fun FabricLanguageProvider.TranslationBuilder.addYACLEntry(property: KProperty<*>, name: String, desc: String) {
-    val configName = "$CFG.${property.name}"
-    add(configName, name)
-    add("$configName.desc", desc)
-}
+//private fun FabricLanguageProvider.TranslationBuilder.addYACLGroup(/*category:String,*/group: String, name: String, desc: String) {
+//    add("$CFG.category.${TiWConfig.CATEGORY}.group.$group", name)
+//    add("$CFG.category.${TiWConfig.CATEGORY}.group.$group.desc", desc)
+//}
+//
+//private fun FabricLanguageProvider.TranslationBuilder.addYACLEntry(property: KProperty<*>, name: String, desc: String) {
+//    val configName = "$CFG.${property.name}"
+//    add(configName, name)
+//    add("$configName.desc", desc)
+//}
 /**
  * @see Formatting
  */
 private class ChineseGen(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataOutput, "zh_cn"/*傻逼MCDEV不能禁用警告*/) {
     override fun generateTranslations(b: TranslationBuilder) {
-        /**/
         b.add(TorchesInWater.NAME_KEY, "水中火把")
         b.add("modmenu.descriptionTranslation.$ID", """
             把火把放在水中！
@@ -110,21 +107,18 @@ private class ChineseGen(dataOutput: FabricDataOutput) : FabricLanguageProvider(
             本模组灵感来源于《Aquatic Torches》中的Aquatic Torch。
         """.trimIndent())
         val glowInkTorchName = "荧光墨汁火把"
-        b.addWithDesc(TiWItems.GLOW_INK_TORCH,glowInkTorchName,"可以放在水源或水流中。可以放在下半砖或楼梯的侧面。会被岩浆冲毁（可设置）。")
-        //b.add(TiWBlocks.WATER_GLOW_INK_TORCH, "水中的荧光墨囊火把")
-        b.add("$CFG.category.${TorchesInWaterConfig.CATEGORY}", "设置")
-        b.addYACLGroup(TorchesInWaterConfig.GLOW_INK_TORCH, glowInkTorchName, """
-            - 由荧光墨囊和木棍合成。
-            - 可以放在水源或水流中。
-            - 可以放在下半砖或楼梯的侧面。
-            - 会被岩浆冲毁（可设置）。
-        """.trimIndent())
-        b.addYACLEntry(TorchesInWaterConfig::lavaDestroy, "岩浆破坏", "岩浆可以冲毁$glowInkTorchName。")
-        b.addYACLEntry(TorchesInWaterConfig::glowInkTorch_luminance, "亮度", """
-            §c！此选项修改后需要重启游戏才能生效！§r
-            方块的亮度等级。
-            §e▲已放置的火把不会自动更新亮度，需要破坏并重新放置。▲§r
-        """.trimIndent())
+        b.addWithDesc(TiWItems.GLOW_INK_TORCH, glowInkTorchName, "可以放在水源或水流中，以及下半砖或楼梯的侧面。")
+        //
+        b.add(TiWConfig.RESTART_KEY, "此选项修改后需要重启游戏才能生效")
+        b.add("config.$ID.${TiWConfig::lavaDestroy.name}", "可以被岩浆冲毁")
+        b.add("config.$ID.${TiWConfig::glowInkTorch_luminance.name}", "亮度等级")
+        b.add("config.$ID.${TiWConfig::glowInkTorch_luminance.name}.error", "已放置的火把不会自动更新亮度，需要破坏并重新放置")
+        //b.addYACLEntry(TiWConfig::lavaDestroy, "岩浆破坏", "岩浆可以冲毁$glowInkTorchName。")
+        //b.addYACLEntry(TiWConfig::glowInkTorch_luminance, "亮度", """
+        //    §c！此选项修改后需要重启游戏才能生效！§r
+        //    方块的亮度等级。
+        //    §e▲已放置的火把不会自动更新亮度，需要破坏并重新放置。▲§r
+        //""".trimIndent())
 
         b.add(TiWIDs.OVERRIDE.toTranslationKey("dataPack"), "移除Aquatic Torch的配方。")
     }
@@ -146,20 +140,17 @@ private class EnglishGen(dataOutput: FabricDataOutput) : FabricLanguageProvider(
         """.trimIndent())
         val glowInkTorchName = "Glow Ink Torch"
         b.addWithDesc(TiWItems.GLOW_INK_TORCH,glowInkTorchName,"Can be placed in water source or flow. Can be placed on the side of bottom slab or stairs. Will be destroyed by lava (configurable).")
-        //b.add(TiWBlocks.WATER_GLOW_INK_TORCH, "水中的荧光墨囊火把")
-        b.add("$CFG.category.${TorchesInWaterConfig.CATEGORY}", "Settings")
-        b.addYACLGroup(TorchesInWaterConfig.GLOW_INK_TORCH, glowInkTorchName, """
-            - Crafted from glow ink sac and stick.
-            - Can be placed in water source or flow.
-            - Can be placed on the side of bottom slab or stairs.
-            - Will be destroyed by lava (configurable).
-        """.trimIndent())
-        b.addYACLEntry(TorchesInWaterConfig::lavaDestroy, "Lava Destroy", "Lava can flow into and destory $glowInkTorchName.")
-        b.addYACLEntry(TorchesInWaterConfig::glowInkTorch_luminance, "Luminous", """
-            §c! After modifying this option, you need to restart the game to take effect!§r
-            The light level of the block.
-            §e▲Placed torches won't auto update light level. You need to break and re-place them.▲§r
-        """.trimIndent())
+        //
+        b.add(TiWConfig.RESTART_KEY, "After modifying this option, you need to restart the game to take effect")
+        b.add("config.$ID.${TiWConfig::lavaDestroy.name}", "Lava can flow into and destory")
+        b.add("config.$ID.${TiWConfig::glowInkTorch_luminance.name}", "Light level")
+        b.add("config.$ID.${TiWConfig::glowInkTorch_luminance.name}.error", "Placed torches won't auto update light level. You need to break and re-place them")
+        //b.addYACLEntry(TiWConfig::lavaDestroy, "Lava Destroy", "Lava can flow into and destory $glowInkTorchName.")
+        //b.addYACLEntry(TiWConfig::glowInkTorch_luminance, "Luminous", """
+        //    §c! After modifying this option, you need to restart the game to take effect!§r
+        //    The light level of the block.
+        //    §e▲Placed torches won't auto update light level. You need to break and re-place them.▲§r
+        //""".trimIndent())
 
         b.add(TiWIDs.OVERRIDE.toTranslationKey("dataPack"), "Remove recipe of Aquatic Torch.")
     }

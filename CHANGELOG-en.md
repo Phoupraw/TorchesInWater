@@ -21,3 +21,5 @@
 # 0.2.1
 ## New
 - MCMOD link.
+## Change
+- The desc of config screen.
