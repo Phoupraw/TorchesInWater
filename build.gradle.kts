@@ -114,3 +114,6 @@ fabricApi {
 kotlin {
     jvmToolchain(17)
 }
+loom {
+    accessWidenerPath.set(file("src/main/resources/torches_in_water.accessWidener"))
+}

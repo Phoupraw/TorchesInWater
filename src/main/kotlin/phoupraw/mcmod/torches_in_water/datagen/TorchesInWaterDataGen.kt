@@ -97,22 +97,17 @@ private fun FabricLanguageProvider.TranslationBuilder.addWithDesc(item: Item, na
 private class ChineseGen(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataOutput, "zh_cn"/*傻逼MCDEV不能禁用警告*/) {
     override fun generateTranslations(b: TranslationBuilder) {
         b.add(TorchesInWater.NAME_KEY, "水中火把")
-        b.add("modmenu.descriptionTranslation.$ID", """
-            把火把放在水中！
-            §l概要§r
-            - 添加了荧光墨汁火把，可以放在水中，由荧光墨囊和木棍合成。
-            §l介绍§r
-            添加了可以放置在水中的火把，包括水流。
-            §l你知道吗§r
-            本模组灵感来源于《Aquatic Torches》中的Aquatic Torch。
-        """.trimIndent())
         val glowInkTorchName = "荧光墨汁火把"
+        b.add("modmenu.summaryTranslation.$ID", "把火把放在水中！")
+        b.add("modmenu.descriptionTranslation.$ID", """
+            - $glowInkTorchName，可以放在水中，由荧光墨囊和木棍合成。
+        """.trimIndent())
         b.addWithDesc(TiWItems.GLOW_INK_TORCH, glowInkTorchName, "可以放在水源或水流中，以及下半砖或楼梯的侧面。")
         //
         b.add(TiWConfig.RESTART_KEY, "此选项修改后需要重启游戏才能生效")
-        b.add("config.$ID.${TiWConfig::lavaDestroy.name}", "可以被岩浆冲毁")
-        b.add("config.$ID.${TiWConfig::glowInkTorch_luminance.name}", "亮度等级")
-        b.add("config.$ID.${TiWConfig::glowInkTorch_luminance.name}.error", "已放置的火把不会自动更新亮度，需要破坏并重新放置")
+        b.add("config.$ID.lavaDestroy.desc", "可以被岩浆冲毁")
+        b.add("config.$ID.glowInkTorch_luminance", "亮度等级")
+        b.add("config.$ID.glowInkTorch_luminance.error", "已放置的火把不会自动更新亮度，需要破坏并重新放置")
         //b.addYACLEntry(TiWConfig::lavaDestroy, "岩浆破坏", "岩浆可以冲毁$glowInkTorchName。")
         //b.addYACLEntry(TiWConfig::glowInkTorch_luminance, "亮度", """
         //    §c！此选项修改后需要重启游戏才能生效！§r
@@ -129,22 +124,17 @@ private class ChineseGen(dataOutput: FabricDataOutput) : FabricLanguageProvider(
 private class EnglishGen(dataOutput: FabricDataOutput) : FabricLanguageProvider(dataOutput) {
     override fun generateTranslations(b: TranslationBuilder) {
         b.add(TorchesInWater.NAME_KEY, "Torches in Water")
-        b.add("modmenu.descriptionTranslation.$ID", """
-            Added torches which can be placed in water.
-            §lSynopsis§r
-            Added Glow ink torch, which can be placed in water, crafted from glow ink sac and stick.
-            §lProfile§r
-            Added torches which can be placed in water, including flow.
-            §lTrivia§r
-            This mod is inspired by Aquatic Torch of §oAquatic Torches§r.
-        """.trimIndent())
         val glowInkTorchName = "Glow Ink Torch"
-        b.addWithDesc(TiWItems.GLOW_INK_TORCH,glowInkTorchName,"Can be placed in water source or flow. Can be placed on the side of bottom slab or stairs. Will be destroyed by lava (configurable).")
+        b.add("modmenu.summaryTranslation.$ID", "Place torches in water!")
+        b.add("modmenu.descriptionTranslation.$ID", """
+            - $glowInkTorchName, which can be placed in water, crafted from glow ink sac and stick.
+        """.trimIndent())
+        b.addWithDesc(TiWItems.GLOW_INK_TORCH, glowInkTorchName, "Can be placed in water source or flow. Can be placed on the side of bottom slab or stairs. Will be destroyed by lava (configurable).")
         //
         b.add(TiWConfig.RESTART_KEY, "After modifying this option, you need to restart the game to take effect")
-        b.add("config.$ID.${TiWConfig::lavaDestroy.name}", "Lava can flow into and destory")
-        b.add("config.$ID.${TiWConfig::glowInkTorch_luminance.name}", "Light level")
-        b.add("config.$ID.${TiWConfig::glowInkTorch_luminance.name}.error", "Placed torches won't auto update light level. You need to break and re-place them")
+        b.add("config.$ID.lavaDestroy.desc", "Lava can flow into and destory")
+        b.add("config.$ID.glowInkTorch_luminance", "Light level")
+        b.add("config.$ID.glowInkTorch_luminance.error", "Placed torches won't auto update light level. You need to break and re-place them")
         //b.addYACLEntry(TiWConfig::lavaDestroy, "Lava Destroy", "Lava can flow into and destory $glowInkTorchName.")
         //b.addYACLEntry(TiWConfig::glowInkTorch_luminance, "Luminous", """
         //    §c! After modifying this option, you need to restart the game to take effect!§r

@@ -57,5 +57,6 @@
       }
     }
   },
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "accessWidener": "torches_in_water.accessWidener"
 }

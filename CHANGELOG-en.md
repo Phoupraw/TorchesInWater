@@ -23,3 +23,4 @@
 - MCMOD link.
 ## Change
 - The desc of config screen.
+- Removed tooltip of glow ink torch.

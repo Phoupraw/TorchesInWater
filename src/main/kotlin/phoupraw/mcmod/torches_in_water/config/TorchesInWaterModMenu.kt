@@ -39,7 +39,9 @@ object TorchesInWaterModMenu : ModMenuApi {
                 .group(OptionGroup.createBuilder()
                   .name(TiWItems.GLOW_INK_TORCH.name)
                   .description(OptionDescription.createBuilder()
-                    .customImage(CompletableFuture.completedFuture(Optional.of(ItemRendererInConfig { TiWItems.GLOW_INK_TORCH.defaultStack })))
+                    //.customImage(CompletableFuture.completedFuture(Optional.of(ItemRendererInConfig { TiWItems.GLOW_INK_TORCH.defaultStack })))
+                    //.image(ID("textures/gallery/glow_ink_torch.png"),1920,1017)
+                    .image(ID("textures/gallery/glow_ink_torches_placement.png"), 1920, 1017)
                     .text(TiWItems.GLOW_INK_TORCH.desc)
                     .build())
                   .option(Option.createBuilder<Boolean>()
@@ -49,20 +51,20 @@ object TorchesInWaterModMenu : ModMenuApi {
                           graphics.drawSprite(x, y, 0, 16, 16, FluidVariantRendering.getSprite(FluidVariant.of(Fluids.LAVA)))
                           16
                       })))
-                      .text(Text.translatableWithFallback("config.$ID.${TiWConfig::lavaDestroy.name}", "可以被岩浆冲毁"))
+                      .text(Text.translatableWithFallback("config.$ID.lavaDestroy", "可以被岩浆冲毁"))
                       .build())
                     .binding(defaults.lavaDestroy, config::lavaDestroy, config::lavaDestroy.setter)
                     .controller(TickBoxControllerBuilder::create)
                     .build())
                   .option(Option.createBuilder<Int>()
-                    .name(Text.translatableWithFallback("config.$ID.${TiWConfig::glowInkTorch_luminance.name}", "亮度等级"))
+                    .name(Text.translatableWithFallback("config.$ID.glowInkTorch_luminance", "亮度等级"))
                     .description(OptionDescription.createBuilder()
                       .customImage(CompletableFuture.completedFuture(Optional.of(ItemRendererInConfig {
                           LightBlock.addNbtForLevel(Items.LIGHT.defaultStack, config.glowInkTorch_luminance)
                       })))
                       .text(
                           RESTART,
-                          error(Text.translatableWithFallback("config.$ID.${TiWConfig::glowInkTorch_luminance.name}.error", "已放置的火把不会自动更新亮度，需要破坏并重新放置")))
+                          error(Text.translatableWithFallback("config.$ID.glowInkTorch_luminance.error", "已放置的火把不会自动更新亮度，需要破坏并重新放置")))
                       .build())
                     .binding(defaults.glowInkTorch_luminance, config::glowInkTorch_luminance, config::glowInkTorch_luminance.setter)
                     .controller {
@@ -70,6 +72,7 @@ object TorchesInWaterModMenu : ModMenuApi {
                           .range(0, 15)
                           .step(1)
                     }
+                    .flag(OptionFlag.GAME_RESTART)
                     .build())
                   .build())
                 .build())
@@ -82,9 +85,9 @@ object TorchesInWaterModMenu : ModMenuApi {
       .append(Text.literal(" !").formatted(Formatting.RED))
 
     fun error(text: Text): MutableText = Text.empty()
-      .append(Text.literal("🔴").setStyle(Style.EMPTY.withColor(MapColor.ORANGE.color)))
+      .append(Text.literal("⚪").setStyle(Style.EMPTY.withColor(MapColor.ORANGE.color)))
       .append(text)
-      .append(Text.literal("🔴").setStyle(Style.EMPTY.withColor(MapColor.ORANGE.color)))
+      .append(Text.literal("⚪").setStyle(Style.EMPTY.withColor(MapColor.ORANGE.color)))
 
     fun warning(text: Text): MutableText = Text.empty()
       .append(Text.literal("▲").formatted(Formatting.YELLOW))

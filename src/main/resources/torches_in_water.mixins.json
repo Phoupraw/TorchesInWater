@@ -5,5 +5,5 @@
   "mixins": ["minecraft.MFlowableFluid", "minecraft.MSchemas"],
   "injectors": {
     "defaultRequire": 1
-  }
+  }, "client": ["modmenu.MDescriptionListWidget"]
 }
