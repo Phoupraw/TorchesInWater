@@ -24,3 +24,6 @@
 ## Change
 - The desc of config screen.
 - Removed tooltip of glow ink torch.
+# 0.2.2
+## Fix
+- Placing glow ink torch against the down side of a block causes crash.

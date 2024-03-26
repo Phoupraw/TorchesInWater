@@ -2,13 +2,10 @@
 
 package phoupraw.mcmod.torches_in_water.block
 
-import net.minecraft.block.Block
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
-import net.minecraft.block.ShapeContext
+import net.minecraft.block.*
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
-import net.minecraft.state.property.Properties.HOPPER_FACING
+import net.minecraft.state.property.DirectionProperty
 import net.minecraft.util.function.BooleanBiFunction
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -22,12 +19,12 @@ import phoupraw.mcmod.torches_in_water.voxelShapeOf16
 
 open class AbstractTorchBlock(settings: Settings) : Block(settings) {
     init {
-        defaultState = defaultState.with(HOPPER_FACING, Direction.DOWN)
+        defaultState = defaultState.with(FACING, Direction.DOWN)
     }
     @MustBeInvokedByOverriders
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
-        builder.add(HOPPER_FACING)
+        builder.add(FACING)
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
@@ -36,12 +33,12 @@ open class AbstractTorchBlock(settings: Settings) : Block(settings) {
         val world = ctx.world
         val pos = ctx.blockPos
         if (canPlaceAt(opposite, world, pos)) {
-            blockState = defaultState.with(HOPPER_FACING, opposite)
+            blockState = defaultState.with(FACING, opposite)
         } else {
-            for (side in HOPPER_FACING.values) {
+            for (side in FACING.values) {
                 if (side == opposite) continue
                 if (canPlaceAt(side, world, pos)) {
-                    blockState = defaultState.with(HOPPER_FACING, side)
+                    blockState = defaultState.with(FACING, side)
                     break
                 }
             }
@@ -50,11 +47,11 @@ open class AbstractTorchBlock(settings: Settings) : Block(settings) {
     }
 
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
-        return canPlaceAt(state.get(HOPPER_FACING), world, pos)
+        return canPlaceAt(state.get(FACING), world, pos)
     }
 
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext): VoxelShape {
-        return SHAPES.getOrElse(state.get(HOPPER_FACING)) { VoxelShapes.fullCube() }
+        return SHAPES.getOrElse(state.get(FACING)) { VoxelShapes.fullCube() }
     }
 
     override fun getStateForNeighborUpdate(state: BlockState, direction: Direction, neighborState: BlockState, world: WorldAccess, pos: BlockPos, neighborPos: BlockPos): BlockState {
@@ -62,6 +59,7 @@ open class AbstractTorchBlock(settings: Settings) : Block(settings) {
     }
 
     companion object {
+        val FACING: DirectionProperty = HopperBlock.FACING
         val SHAPES: Map<Direction, VoxelShape> = mapOf(
             Direction.DOWN to voxelShapeOf16(6, 0, 6, 10, 10, 10),
             Direction.WEST to createCuboidShape(0.0, 3.0, 5.5, 5.0, 13.0, 10.5),
@@ -74,9 +72,10 @@ open class AbstractTorchBlock(settings: Settings) : Block(settings) {
          * 如果是插在地上，那么[side]是[Direction.DOWN]，如果插在西边的墙上，那么[side]是[Direction.WEST]。
          */
         fun canPlaceAt(side: Direction, world: WorldView, pos: BlockPos): Boolean {
+            if (side == Direction.UP) return false
             val pos1 = pos.offset(side)
             val opposite = side.opposite
-            if (side.axis.isVertical) {
+            if (side == Direction.DOWN) {
                 return sideCoversSmallSquare(world, pos1, opposite)
             }
             return !VoxelShapes.matchesAnywhere(world.getBlockState(pos1).getSidesShape(world, pos1).getFace(opposite), WALL, BooleanBiFunction.ONLY_SECOND)
