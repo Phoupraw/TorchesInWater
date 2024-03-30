@@ -59,7 +59,9 @@ open class AbstractTorchBlock(settings: Settings) : Block(settings) {
     }
 
     companion object {
+        @JvmField
         val FACING: DirectionProperty = HopperBlock.FACING
+        @JvmField
         val SHAPES: Map<Direction, VoxelShape> = mapOf(
             Direction.DOWN to voxelShapeOf16(6, 0, 6, 10, 10, 10),
             Direction.WEST to createCuboidShape(0.0, 3.0, 5.5, 5.0, 13.0, 10.5),
@@ -67,7 +69,9 @@ open class AbstractTorchBlock(settings: Settings) : Block(settings) {
             Direction.NORTH to createCuboidShape(5.5, 3.0, 0.0, 10.5, 13.0, 5.0),
             Direction.SOUTH to createCuboidShape(5.5, 3.0, 11.0, 10.5, 13.0, 16.0)
         )
+        @JvmField
         val WALL = voxelShapeOf16(6, 3, 6, 10, 7, 10)
+        @JvmStatic
         /**
          * 如果是插在地上，那么[side]是[Direction.DOWN]，如果插在西边的墙上，那么[side]是[Direction.WEST]。
          */

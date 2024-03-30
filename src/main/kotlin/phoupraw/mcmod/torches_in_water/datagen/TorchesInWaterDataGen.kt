@@ -32,8 +32,9 @@ object TorchesInWaterDataGen : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(g: FabricDataGenerator) {
         val pack = g.createPack()
         pack.addProvider(::BlockLootGen)
-        pack.addProvider(::FluidTagGen)
         pack.addProvider(::ItemTagGen)
+        pack.addProvider(::BlockTagGen)
+        pack.addProvider(::FluidTagGen)
         pack.addProvider(::RecipeGen)
 
         pack.addProvider(::ModelGen)
@@ -51,18 +52,24 @@ private class BlockLootGen(dataOutput: FabricDataOutput) : FabricBlockLootTableP
     }
 }
 
-private class FluidTagGen(output: FabricDataOutput, completableFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.FluidTagProvider(output, completableFuture) {
-    override fun configure(arg: RegistryWrapper.WrapperLookup) {
-        //getOrCreateTagBuilder(InfiniteFluidBucket.INFINITE).add(Fluids.EMPTY, Fluids.WATER)
-    }
-}
+
 
 private class ItemTagGen(output: FabricDataOutput, completableFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.ItemTagProvider(output, completableFuture) {
     override fun configure(arg: RegistryWrapper.WrapperLookup) {
         //getOrCreateTagBuilder(TiWItemTags.DESC).add(TiWItems.GLOW_INK_TORCH)
     }
 }
+private class BlockTagGen(output: FabricDataOutput, completableFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.BlockTagProvider(output, completableFuture) {
+    override fun configure(arg: RegistryWrapper.WrapperLookup) {
+        //getOrCreateTagBuilder(BlockTags.WALL_POST_OVERRIDE).add(TiWBlocks.GLOW_INK_TORCH)
+    }
+}
 
+private class FluidTagGen(output: FabricDataOutput, completableFuture: CompletableFuture<RegistryWrapper.WrapperLookup>) : FabricTagProvider.FluidTagProvider(output, completableFuture) {
+    override fun configure(arg: RegistryWrapper.WrapperLookup) {
+        //getOrCreateTagBuilder(InfiniteFluidBucket.INFINITE).add(Fluids.EMPTY, Fluids.WATER)
+    }
+}
 private class RecipeGen(output: FabricDataOutput) : FabricRecipeProvider(output) {
     override fun generate(exporter: Consumer<RecipeJsonProvider>) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, TiWItems.GLOW_INK_TORCH, 4)

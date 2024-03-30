@@ -101,10 +101,12 @@ open class GlowInkTorchBlock(settings: Settings) : AbstractTorchBlock(settings),
         val source: Boolean get() = level == 0 || level == 8
         override fun compareTo(other: Water): Int = level.compareTo(other.level)
 
-        companion object : Property<Water>("level", Water::class.java) {
+        companion object PROPERTY : Property<Water>("level", Water::class.java) {
             const val EMPTY = 16
             const val FALLING = 8
+            @JvmField
             val RANGE = 0..EMPTY
+            @JvmField
             val VALUES = RANGE.map { Water(it) }
             override fun getValues(): Collection<Water> = VALUES
             override fun parse(name: String): Optional<Water> = name.toInt().let { if (it in RANGE) Optional.of(Water(it)) else Optional.empty() }

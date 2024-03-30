@@ -27,3 +27,6 @@
 # 0.2.2
 ## Fix
 - Placing glow ink torch against the down side of a block causes crash.
+# 0.2.3
+## Fix
+- Glow ink torch doesn't make wall have tall shape.
