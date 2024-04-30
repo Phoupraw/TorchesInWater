@@ -12,6 +12,7 @@ import net.minecraft.item.Items
 import net.minecraft.text.Text
 import phoupraw.mcmod.torches_in_water.api.BlockFluidContext
 import phoupraw.mcmod.torches_in_water.block.GlowInkTorchBlock
+import phoupraw.mcmod.torches_in_water.block.JGlowInkTorchBlock
 import phoupraw.mcmod.torches_in_water.constant.TiWBlocks
 import phoupraw.mcmod.torches_in_water.constant.TiWIDs
 import phoupraw.mcmod.torches_in_water.constant.TiWItems
@@ -25,7 +26,7 @@ object TorchesInWater : ModInitializer {
             it.addAfter(Items.SOUL_TORCH, TiWItems.GLOW_INK_TORCH)
         }
         BlockFluidContext.BLOCK_FLUID.registerForBlocks({ world, pos, state, blockEntity, context ->
-            state.with(GlowInkTorchBlock.Water, GlowInkTorchBlock.Water(context.newFluidState))
+            state.with(JGlowInkTorchBlock.LEVEL, JGlowInkTorchBlock.toLevel(context.newFluidState))
         }, TiWBlocks.GLOW_INK_TORCH)
         ResourceManagerHelper.registerBuiltinResourcePack(TiWIDs.OVERRIDE, FabricLoader.getInstance().getModContainer(ID).orElseThrow(), Text.translatable(TiWIDs.OVERRIDE.toTranslationKey("dataPack")), ResourcePackActivationType.DEFAULT_ENABLED)
     }

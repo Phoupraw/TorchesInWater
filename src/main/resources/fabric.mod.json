@@ -11,30 +11,10 @@
     "issues": "https://github.com/Phoupraw/TorchesInWater/issues"
   },
   "entrypoints": {
-    "main": [
-      {
-        "adapter": "kotlin",
-        "value": "phoupraw.mcmod.torches_in_water.TorchesInWater"
-      }
-    ],
-    "client": [
-      {
-        "adapter": "kotlin",
-        "value": "phoupraw.mcmod.torches_in_water.client.TorchesInWaterClient"
-      }
-    ],
-    "fabric-datagen": [
-      {
-        "adapter": "kotlin",
-        "value": "phoupraw.mcmod.torches_in_water.datagen.TorchesInWaterDataGen"
-      }
-    ],
-    "modmenu": [
-      {
-        "adapter": "kotlin",
-        "value": "phoupraw.mcmod.torches_in_water.config.TorchesInWaterModMenu"
-      }
-    ]
+    "main": ["phoupraw.mcmod.torches_in_water.TorchesInWater"],
+    "client": ["phoupraw.mcmod.torches_in_water.client.TiWClient"],
+    "fabric-datagen": ["phoupraw.mcmod.torches_in_water.datagen.TiWDataGen"],
+    "modmenu": ["phoupraw.mcmod.torches_in_water.config.TiWModMenuApi"]
   },
   "environment": "*",
   "depends": {
