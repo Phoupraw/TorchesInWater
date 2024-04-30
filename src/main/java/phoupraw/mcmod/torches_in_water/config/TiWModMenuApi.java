@@ -5,11 +5,9 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LightBlock;
 import net.minecraft.block.MapColor;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Items;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -59,7 +57,7 @@ public final class TiWModMenuApi implements ModMenuApi {
                 .name(Blocks.LAVA.getName())
                 .description(OptionDescription
                   .createBuilder()
-                  .customImage(FluidRendererInConfig.of(FluidVariant.of(Fluids.LAVA)))
+                  .customImage(LavaRendererInConfig.FUTURE)
                   .text(Text.translatable("config." + TorchesInWater.ID + ".lavaDestroy.desc"))
                   .build())
                 .binding(defaults.lavaDestroy, config::isLavaDestroy, config::setLavaDestroy)

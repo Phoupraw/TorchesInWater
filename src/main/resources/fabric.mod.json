@@ -18,9 +18,9 @@
   },
   "environment": "*",
   "depends": {
+    "minecraft": ">=1.20 <=1.20.4",
     "fabricloader": "*",
     "fabric-api": "*",
-    "fabric-language-kotlin": "*",
     "yet_another_config_lib_v3": "*"
   },
   "recommends": {

@@ -4,19 +4,16 @@ import dev.isxander.yacl3.gui.image.ImageRenderer;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.fluid.Fluids;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-@Deprecated
-public record FluidRendererInConfig(FluidVariant fluid) implements RendererInConfig {
-    public static CompletableFuture<Optional<ImageRenderer>> of(FluidVariant fluid) {
-        return CompletableFuture.completedFuture(Optional.of(new FluidRendererInConfig(fluid)));
-    }
+public class LavaRendererInConfig implements RendererInConfig {
+    public static final CompletableFuture<Optional<ImageRenderer>> FUTURE = CompletableFuture.completedFuture(Optional.of(new LavaRendererInConfig()));
     @Override
     public int render(DrawContext graphics, int x, int y, int renderWidth, float tickDelta) {
-        int c = FluidVariantRendering.getColor(fluid);
-        graphics.drawSprite(x, y, 0, 16, 16, FluidVariantRendering.getSprite(fluid), c >>> 24 & 0xFF, c >>> 16 & 0xFF, c >>> 8 & 0xFF, c & 0xFF);
+        graphics.drawSprite(x, y, 0, 16, 16, FluidVariantRendering.getSprite(FluidVariant.of(Fluids.LAVA)));
         return 16;
     }
 }
