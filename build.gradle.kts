@@ -62,13 +62,13 @@ dependencies {
     modApi("net.fabricmc:fabric-loader:${property("loader_version")}")
     modApi("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
     modCompileOnly(modLocalRuntime("com.terraformersmc:modmenu:${property("modmenu")}")!!)
-    include(modImplementation("phoupraw.mcmod:PhouprawsLinkedLib:+")!!)
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
+    //include(modImplementation("phoupraw.mcmod:PhouprawsLinkedLib:+")!!)
     modApi("dev.isxander.yacl:yet-another-config-lib-fabric:${property("yet_another_config_lib")}")
     //annotationProcessor(modApi("io.wispforest:owo-lib:${property("owo_lib")}")!!)
     //由于KT自带的与java互操作不太好用，所以我自己写了一个
-    modCompileOnly("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}") { exclude(module = "fabric-transfer-api-v1") }
-    modRuntimeOnly("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
-    modCompileOnly("phoupraw.mcmod:FabricAPIKotlinOverwrite:+")
+    //modCompileOnly("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}") { exclude(module = "fabric-transfer-api-v1") }
+    //modCompileOnly("phoupraw.mcmod:FabricAPIKotlinOverwrite:+")
 }
 
 tasks {

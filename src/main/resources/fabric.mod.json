@@ -41,7 +41,6 @@
     "fabricloader": "*",
     "fabric-api": "*",
     "fabric-language-kotlin": "*",
-    "phoupraws_linked_lib": "*",
     "yet_another_config_lib_v3": "*"
   },
   "recommends": {
