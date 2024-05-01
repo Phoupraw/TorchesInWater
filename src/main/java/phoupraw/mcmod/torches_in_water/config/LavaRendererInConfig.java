@@ -10,7 +10,9 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class LavaRendererInConfig implements RendererInConfig {
-    public static final CompletableFuture<Optional<ImageRenderer>> FUTURE = CompletableFuture.completedFuture(Optional.of(new LavaRendererInConfig()));
+    public static CompletableFuture<Optional<ImageRenderer>> of() {
+        return CompletableFuture.completedFuture(Optional.of(new LavaRendererInConfig()));
+    }
     @Override
     public int render(DrawContext graphics, int x, int y, int renderWidth, float tickDelta) {
         graphics.drawSprite(x, y, 0, 16, 16, FluidVariantRendering.getSprite(FluidVariant.of(Fluids.LAVA)));

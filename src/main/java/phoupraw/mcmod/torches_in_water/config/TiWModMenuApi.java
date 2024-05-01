@@ -5,10 +5,9 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
+import dev.isxander.yacl3.gui.YACLScreen;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LightBlock;
 import net.minecraft.block.MapColor;
-import net.minecraft.item.Items;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -38,12 +37,13 @@ public final class TiWModMenuApi implements ModMenuApi {
           .append(text)
           .append(Text.literal(" !").formatted(Formatting.RED));
     }
-    private static YetAnotherConfigLib.Builder createScreen(TiWConfig defaults, TiWConfig config, YetAnotherConfigLib.Builder builder) {
+    private static YetAnotherConfigLib.Builder buildScreen(TiWConfig defaults, TiWConfig config, YetAnotherConfigLib.Builder builder) {
         return builder
-          .title(Text.translatable(TorchesInWater.NAME_KEY))
+          .screenInit(TiWModMenuApi::onScreenInit)
+          .title(TorchesInWater.name())
           .category(ConfigCategory
             .createBuilder()
-            .name(Text.translatable(TorchesInWater.NAME_KEY))
+            .name(TorchesInWater.name())
             .group(OptionGroup
               .createBuilder()
               .name(TiWItems.GLOW_INK_TORCH.getName())
@@ -57,7 +57,7 @@ public final class TiWModMenuApi implements ModMenuApi {
                 .name(Blocks.LAVA.getName())
                 .description(OptionDescription
                   .createBuilder()
-                  .customImage(LavaRendererInConfig.FUTURE)
+                  .customImage(LavaRendererInConfig.of())
                   .text(Text.translatable("config." + TorchesInWater.ID + ".lavaDestroy.desc"))
                   .build())
                 .binding(defaults.lavaDestroy, config::isLavaDestroy, config::setLavaDestroy)
@@ -68,7 +68,7 @@ public final class TiWModMenuApi implements ModMenuApi {
                 .name(Text.translatable("config." + TorchesInWater.ID + ".glowInkTorch_luminance.desc"))
                 .description(OptionDescription
                   .createBuilder()
-                  .customImage(ItemRendererInConfig.of(() -> LightBlock.addNbtForLevel(Items.LIGHT.getDefaultStack(), config.glowInkTorch_luminance)))
+                  .customImage(LightRendererInConfig.of(config::getGlowInkTorch_luminance))
                   .text(
                     RESTART,
                     error(Text.translatable("config." + TorchesInWater.ID + ".glowInkTorch_luminance.error")))
@@ -83,8 +83,9 @@ public final class TiWModMenuApi implements ModMenuApi {
               .build())
             .build());
     }
+    private static void onScreenInit(YACLScreen screen) {TiWConfig.HANDLER.load();}
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> YetAnotherConfigLib.create(TiWConfig.HANDLER, TiWModMenuApi::createScreen).generateScreen(parent);
+        return parent -> YetAnotherConfigLib.create(TiWConfig.HANDLER, TiWModMenuApi::buildScreen).generateScreen(parent);
     }
 }

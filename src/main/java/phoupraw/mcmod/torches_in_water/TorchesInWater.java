@@ -7,7 +7,9 @@ import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.NotNull;
 import phoupraw.mcmod.torches_in_water.api.BlockFluidContext;
 import phoupraw.mcmod.torches_in_water.block.GlowInkTorchBlock;
 import phoupraw.mcmod.torches_in_water.constant.TiWBlocks;
@@ -17,6 +19,9 @@ import phoupraw.mcmod.torches_in_water.constant.TiWItems;
 public final class TorchesInWater implements ModInitializer {
     public static final String ID = "torches_in_water";
     public static final String NAME_KEY = "modmenu.nameTranslation." + ID;
+    public static @NotNull MutableText name() {
+        return Text.translatable(NAME_KEY);
+    }
     @Override
     public void onInitialize() {
         TiWItems.ITEM_GROUP.getType();
